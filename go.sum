@@ -1,0 +1,6 @@
+github.com/rs/xid v1.5.0 h1:mKX4bl4iPYJtEIxp6CYiUuLQ/8DYMoz0PUdtGgMFRVc=
+github.com/rs/xid v1.5.0/go.mod h1:trrq9SKmegXys3aeAKXMUTdJsYXVwGY3RLcfgqegfbg=
+github.com/thcomp/GoLang_APIHandler v1.1.0 h1:wtfY25+X8r9GrUzslHCUjRE0/1X+XzGfbp12nDTgfm4=
+github.com/thcomp/GoLang_APIHandler v1.1.0/go.mod h1:mTFDMj+pjk2DsEqP/vn4XeZEm5qphn5N+EF/YIUXPpQ=
+github.com/thcomp/GoLang_Utility v1.30.0 h1:3t92u02KNHz8ek96yk+nfHLDZrl0CnSfq1/xkA4uluY=
+github.com/thcomp/GoLang_Utility v1.30.0/go.mod h1:ges+bpSSIl0BpDUjFYVM3RH1ilhtUHHvcrp69fkzq/M=
