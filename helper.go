@@ -28,8 +28,7 @@ type HttpEntity interface {
 }
 
 type HttpEntityParser interface {
-	ParseRequestBody(*http.Request) (HttpEntity, error)
-	ParseResponseBody(*http.Response) (HttpEntity, error)
+	Parse(interface{}) (HttpEntity, error)
 }
 
 type HttpEntityHelper struct {
@@ -47,7 +46,7 @@ func NewHttpEntityHelper(data interface{}, reusable bool) (ret *HttpEntityHelper
 	} else {
 		ret = &HttpEntityHelper{
 			parsers: [][]HttpEntityParser{
-				[]HttpEntityParser{jsonrpc.NewJSONRPCExecutor(), &multipart.MultipartFormExecutor{}, &urlenc.URLEncExecutor{}},
+				[]HttpEntityParser{jsonrpc.NewJSONRPCParser(), &multipart.MultipartFormParser{}, &urlenc.URLEncParser{}},
 			},
 		}
 		if reusable {
@@ -125,19 +124,16 @@ func (helper *HttpEntityHelper) HttpEntity() HttpEntity {
 
 		for _, parserList := range helper.parsers {
 			for _, parser := range parserList {
-				if helper.request != nil {
-					if entity, err := parser.ParseRequestBody(helper.request); err == nil {
-						helper.parsedEntity = entity
-					} else {
-						fmt.Printf("Error parsing request body: %v\n", err)
-					}
-				} else if helper.respose != nil {
-					if entity, err := parser.ParseResponseBody(helper.respose); err == nil {
-						helper.parsedEntity = entity
-					} else {
-						fmt.Printf("Error parsing response body: %v\n", err)
-					}
+				if entity, err := parser.Parse(helper.request); err == nil {
+					helper.parsedEntity = entity
+					break
+				} else {
+					fmt.Printf("Error parsing request body: %v\n", err)
 				}
+			}
+
+			if helper.parsedEntity != nil {
+				break
 			}
 		}
 	}
