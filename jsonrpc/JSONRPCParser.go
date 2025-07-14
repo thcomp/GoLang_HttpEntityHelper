@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	root "github.com/thcomp/Golang_HttpEntityHelper"
+	"github.com/thcomp/GoLang_HttpEntityHelper/entity"
 )
 
 type JSONRPCParser struct {
@@ -20,7 +20,7 @@ func NewJSONRPCParser() *JSONRPCParser {
 	return &JSONRPCParser{}
 }
 
-func (parser *JSONRPCParser) Parse(obj interface{}) (ret root.HttpEntity, retErr error) {
+func (parser *JSONRPCParser) Parse(obj interface{}) (ret entity.HttpEntity, retErr error) {
 	body := (io.Reader)(nil)
 	header := http.Header(nil)
 	jsonrpcIntf := interface{}(nil)
@@ -59,7 +59,7 @@ func (parser *JSONRPCParser) Parse(obj interface{}) (ret root.HttpEntity, retErr
 				retErr = parseErr
 			}
 		} else {
-			retErr = root.ErrUnsupportEntity
+			retErr = entity.ErrUnsupportEntity
 		}
 	}
 

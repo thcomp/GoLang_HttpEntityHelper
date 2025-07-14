@@ -5,20 +5,19 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/thcomp/GoLang_HttpEntityHelper/entity"
 	ThcompUtility "github.com/thcomp/GoLang_Utility"
-	root "github.com/thcomp/Golang_HttpEntityHelper"
 )
 
 type MultipartFormParser struct {
 	cacheEditorFactory ThcompUtility.CacheEditorFactory
-	handler            root.ExecuteHandler
 }
 
 func (parser *MultipartFormParser) CacheEditorFactory(cacheEditorFactory ThcompUtility.CacheEditorFactory) {
 	parser.cacheEditorFactory = cacheEditorFactory
 }
 
-func (parser *MultipartFormParser) Parse(obj interface{}) (ret root.HttpEntity, retErr error) {
+func (parser *MultipartFormParser) Parse(obj interface{}) (ret entity.HttpEntity, retErr error) {
 	formData := (*MultipartFormData)(nil)
 
 	switch v := obj.(type) {

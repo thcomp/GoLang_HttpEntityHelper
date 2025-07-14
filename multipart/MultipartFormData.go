@@ -1,27 +1,23 @@
 package multipart
 
 import (
-	"fmt"
-
-	root "github.com/thcomp/GoLang_HttpEntityHelper"
+	"github.com/thcomp/GoLang_HttpEntityHelper/entity"
 	ThcompUtility "github.com/thcomp/GoLang_Utility"
 )
-
-var sErrNotExistFormData error = fmt.Errorf("not exist form data")
 
 type MultipartFormData struct {
 	helper *ThcompUtility.MultipartHelper
 }
 
-func (formData *MultipartFormData) EntityType() root.HttpEntityType {
-	return root.MultipartFormData
+func (formData *MultipartFormData) EntityType() entity.HttpEntityType {
+	return entity.MultipartFormData
 }
 
 func (formData *MultipartFormData) Close() error {
 	if formData.helper != nil {
 		return formData.helper.Close()
 	} else {
-		return sErrNotExistFormData
+		return entity.ErrNotExistFormData
 	}
 }
 
@@ -37,7 +33,7 @@ func (formData *MultipartFormData) GetByIndex(index int) (*ThcompUtility.FormDat
 	if formData.helper != nil {
 		return formData.helper.GetByIndex(index)
 	} else {
-		return nil, sErrNotExistFormData
+		return nil, entity.ErrNotExistFormData
 	}
 }
 
@@ -45,7 +41,7 @@ func (formData *MultipartFormData) GetByName(partName string) (*ThcompUtility.Fo
 	if formData.helper != nil {
 		return formData.helper.GetByName(partName)
 	} else {
-		return nil, sErrNotExistFormData
+		return nil, entity.ErrNotExistFormData
 	}
 }
 

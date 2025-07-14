@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"sync"
 
-	root "github.com/thcomp/GoLang_HttpEntityHelper"
+	"github.com/thcomp/GoLang_HttpEntityHelper/entity"
 	ThcompUtility "github.com/thcomp/GoLang_Utility"
 )
 
@@ -140,8 +140,8 @@ func ParseJSONRequest(reader io.Reader) (*JSONRPCRequest, error) {
 	return ret, retErr
 }
 
-func (req *JSONRPCRequest) EntityType() root.HttpEntityType {
-	return root.JSONRPC_Request
+func (req *JSONRPCRequest) EntityType() entity.HttpEntityType {
+	return entity.JSONRPC_Request
 }
 
 func (req *JSONRPCRequest) EncodeByJSON() ([]byte, error) {
@@ -251,8 +251,8 @@ func ParseJSONResponse(reader io.Reader) (*JSONRPCResponse, error) {
 	return ret, retErr
 }
 
-func (res *JSONRPCResponse) EntityType() root.HttpEntityType {
-	return root.JSONRPC_Response
+func (res *JSONRPCResponse) EntityType() entity.HttpEntityType {
+	return entity.JSONRPC_Response
 }
 
 func (res *JSONRPCResponse) EncodeByJSON() ([]byte, error) {
@@ -304,8 +304,8 @@ func NewJSONRPCError(code int, message string, data interface{}) *JSONRPCError {
 	}
 }
 
-func (err *JSONRPCError) EntityType() root.HttpEntityType {
-	return root.JSONRPC_Error
+func (err *JSONRPCError) EntityType() entity.HttpEntityType {
+	return entity.JSONRPC_Error
 }
 
 func (err *JSONRPCError) ParseData(toPtr interface{}) (retErr error) {

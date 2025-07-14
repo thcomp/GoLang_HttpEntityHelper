@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"strings"
 
-	root "github.com/thcomp/Golang_HttpEntityHelper"
+	root "github.com/thcomp/GoLang_HttpEntityHelper"
 )
 
 type URLEncParser struct {
