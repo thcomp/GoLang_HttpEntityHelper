@@ -6,29 +6,15 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/thcomp/GoLang_HttpEntityHelper/entity"
 	"github.com/thcomp/GoLang_HttpEntityHelper/jsonrpc"
 	"github.com/thcomp/GoLang_HttpEntityHelper/multipart"
 	"github.com/thcomp/GoLang_HttpEntityHelper/urlenc"
 	ThcompUtility "github.com/thcomp/GoLang_Utility"
 )
 
-type HttpEntityType int
-
-const (
-	Unknown HttpEntityType = iota
-	JSONRPC_Request
-	JSONRPC_Response
-	JSONRPC_Error
-	MultipartFormData
-	UrlEncoding
-)
-
-type HttpEntity interface {
-	EntityType() HttpEntityType
-}
-
 type HttpEntityParser interface {
-	Parse(interface{}) (HttpEntity, error)
+	Parse(interface{}) (entity.HttpEntity, error)
 }
 
 type HttpEntityHelper struct {
@@ -37,7 +23,7 @@ type HttpEntityHelper struct {
 	parsers      [][]HttpEntityParser
 	mimeType     *string
 	buffer       *bytes.Buffer
-	parsedEntity HttpEntity
+	parsedEntity entity.HttpEntity
 }
 
 func NewHttpEntityHelper(data interface{}, reusable bool) (ret *HttpEntityHelper, retErr error) {
@@ -102,7 +88,7 @@ func (helper *HttpEntityHelper) RegistParser(parser HttpEntityParser, priority u
 	}
 }
 
-func (helper *HttpEntityHelper) HttpEntity() HttpEntity {
+func (helper *HttpEntityHelper) HttpEntity() entity.HttpEntity {
 	if helper.parsedEntity != nil {
 		// no-op
 	} else if helper.request == nil && helper.request.Body == nil && helper.respose == nil && helper.respose.Body == nil {
