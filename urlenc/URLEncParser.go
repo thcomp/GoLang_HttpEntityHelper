@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"strings"
 
-	root "github.com/thcomp/GoLang_HttpEntityHelper"
+	"github.com/thcomp/GoLang_HttpEntityHelper/entity"
 )
 
 type URLEncParser struct {
@@ -30,7 +30,7 @@ func (parser *URLEncParser) parseEntity(reader io.Reader) (ret *URLEncData, retE
 	return
 }
 
-func (parser *URLEncParser) Parse(obj interface{}) (ret root.HttpEntity, retErr error) {
+func (parser *URLEncParser) Parse(obj interface{}) (ret entity.HttpEntity, retErr error) {
 	reader := io.Reader(nil)
 	header := http.Header(nil)
 	url := (*url.URL)(nil)

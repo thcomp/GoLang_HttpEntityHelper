@@ -3,13 +3,13 @@ package urlenc
 import (
 	"net/url"
 
-	root "github.com/thcomp/GoLang_HttpEntityHelper"
+	"github.com/thcomp/GoLang_HttpEntityHelper/entity"
 )
 
 type URLEncData struct {
 	queryValues *url.Values
 }
 
-func (encData *URLEncData) EntityType() root.HttpEntityType {
-	return root.UrlEncoding
+func (encData *URLEncData) EntityType() entity.HttpEntityType {
+	return entity.UrlEncoding
 }
