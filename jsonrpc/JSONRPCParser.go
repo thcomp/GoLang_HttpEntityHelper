@@ -29,18 +29,18 @@ func (parser *JSONRPCParser) Parse(obj interface{}) (ret entity.HttpEntity, retE
 	case *http.Request:
 		body = v.Body
 		header = v.Header
-		jsonrpcIntf = JSONRPCRequest{}
+		jsonrpcIntf = &JSONRPCRequest{}
 	case *http.Response:
 		body = v.Body
 		header = v.Header
-		jsonrpcIntf = JSONRPCResponse{}
+		jsonrpcIntf = &JSONRPCResponse{}
 	default:
 		retErr = fmt.Errorf("can not parse on JSONRPC Request, unsupported type: %v", v)
 	}
 
 	if retErr == nil {
 		if parser.IsJSON(header) {
-			if parseErr := json.NewDecoder(body).Decode(&jsonrpcIntf); parseErr == nil {
+			if parseErr := json.NewDecoder(body).Decode(jsonrpcIntf); parseErr == nil {
 				switch jsonrpcIns := jsonrpcIntf.(type) {
 				case JSONRPCRequest:
 					if jsonrpcIns.Version != "2.0" || jsonrpcIns.Method == "" {
