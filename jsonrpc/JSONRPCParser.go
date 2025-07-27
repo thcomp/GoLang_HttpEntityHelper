@@ -42,17 +42,17 @@ func (parser *JSONRPCParser) Parse(obj interface{}) (ret entity.HttpEntity, retE
 		if parser.IsJSON(header) {
 			if parseErr := json.NewDecoder(body).Decode(jsonrpcIntf); parseErr == nil {
 				switch jsonrpcIns := jsonrpcIntf.(type) {
-				case JSONRPCRequest:
+				case *JSONRPCRequest:
 					if jsonrpcIns.Version != "2.0" || jsonrpcIns.Method == "" {
 						retErr = fmt.Errorf("can not parse on JSONRPC Request")
 					} else {
-						ret = &jsonrpcIns
+						ret = jsonrpcIns
 					}
-				case JSONRPCResponse:
+				case *JSONRPCResponse:
 					if jsonrpcIns.Version != "2.0" {
 						retErr = fmt.Errorf("can not parse on JSONRPC Response")
 					} else {
-						ret = &jsonrpcIns
+						ret = jsonrpcIns
 					}
 				}
 			} else {
